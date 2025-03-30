@@ -2,22 +2,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purity Test</title>
+    <title>DLSU Privilege Test</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+<body class="bg-[#00703D] flex justify-center items-center min-h-screen">
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
-        <h1 class="text-2xl font-bold text-center mb-4">Purity Test</h1>
+        <h1 class="text-2xl font-bold text-center mb-4">DLSU Privilege Test</h1>
         <form id="purityTest">
             <div class="space-y-2">
                 <label class="flex items-center">
-                    <input type="checkbox" class="mr-2" name="q1"> Have you ever lied?
+                    <input type="checkbox" class="mr-2" name="q1"> Never used a jeepney
                 </label>
                 <label class="flex items-center">
-                    <input type="checkbox" class="mr-2" name="q2"> Have you ever cheated on a test?
+                    <input type="checkbox" class="mr-2" name="q2"> Never used a train
                 </label>
                 <label class="flex items-center">
-                    <input type="checkbox" class="mr-2" name="q3"> Have you ever stayed up all night?
+                    <input type="checkbox" class="mr-2" name="q3"> Never tried microwaveable food
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q4"> Have a room to yourself
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q5"> Have a floor to yourself
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q6"> Have a driver
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q7"> At one point lived in Dubai
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q8"> Born in Saudi
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q9"> Do you know how to cross the street?
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q10"> Do you know how to cross the street in Manila?
                 </label>
             </div>
             <button type="button" onclick="calculateScore()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg w-full">Submit</button>
@@ -28,8 +49,35 @@
     <script>
         function calculateScore() {
             let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-            let score = 100 - (checkboxes.length * 10); // Example scoring logic
-            document.getElementById('result').textContent = `Your purity score is: ${score}`;
+            let score = 0;
+    
+            // Loop through all checkboxes
+            checkboxes.forEach((checkbox) => {
+                // Add 10 points for all checked checkboxes except q9 and q10
+                if (checkbox.name !== 'q9' && checkbox.name !== 'q10') {
+                    score += 10;
+                }
+            });
+    
+            // Handle q9 and q10 (add 10 points if NOT checked)
+            let q9 = document.querySelector('input[name="q9"]');
+            let q10 = document.querySelector('input[name="q10"]');
+            if (!q9.checked) score += 10;
+            if (!q10.checked) score += 10;
+            // Conditional logic for specific scores
+            let resultMessage = '';
+            if (score === 100) {
+                resultMessage = 'What are you, Kyle?';
+            } else if (score >= 70) {
+                resultMessage = 'You are quite privileged.';
+            } else if (score >= 40) {
+                resultMessage = 'You have some privileges.';
+            } else {
+                resultMessage = 'You have fewer privileges.';
+            }
+    
+            // Display the result
+            document.getElementById('result').textContent = `Your privilege score is: ${score}. ${resultMessage}`;
         }
     </script>
 </body>
