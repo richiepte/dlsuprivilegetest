@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purity Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-center mb-4">Purity Test</h1>
+        <form id="purityTest">
+            <div class="space-y-2">
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q1"> Have you ever lied?
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q2"> Have you ever cheated on a test?
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" class="mr-2" name="q3"> Have you ever stayed up all night?
+                </label>
+            </div>
+            <button type="button" onclick="calculateScore()" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg w-full">Submit</button>
+        </form>
+        <p id="result" class="mt-4 text-center font-bold text-lg"></p>
+    </div>
+    
+    <script>
+        function calculateScore() {
+            let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            let score = 100 - (checkboxes.length * 10); // Example scoring logic
+            document.getElementById('result').textContent = `Your purity score is: ${score}`;
+        }
+    </script>
+</body>
+</html>
